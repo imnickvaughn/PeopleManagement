@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>People Management</span>
+    <span class="example-spacer"></span>
+    <mat-icon
+      routerLinkActive="mat-accent" [routerLink]="['/dashboard']"
+      class="example-icon"
+      aria-hidden="false"
+      aria-label="Example heart icon"
+      >dashboard</mat-icon
+    >
+    <mat-icon
+      routerLinkActive="mat-accent" [routerLink]="['/edit']"
+      class="example-icon"
+      aria-hidden="false"
+      aria-label="Example delete icon"
+      >create</mat-icon
+    >
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

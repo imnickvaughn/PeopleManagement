@@ -1,16 +1,27 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { USERS } from '../model/testing/userTest.constant';
+import { UserStore } from '../shared/user.store';
 
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  let store: UserStore
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      imports: [HttpClientTestingModule],
+      providers: [UserStore],
+      declarations: [DashboardComponent]
     })
-    .compileComponents();
+      .compileComponents().then(() => {
+        fixture = TestBed.createComponent(DashboardComponent);
+        component = fixture.componentInstance;
+        store = TestBed.inject(UserStore);
+        store.users.next(USERS);
+      });
   });
 
   beforeEach(() => {

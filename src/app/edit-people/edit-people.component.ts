@@ -25,7 +25,7 @@ export class EditPeopleComponent implements OnInit {
   }
 
 
-  startEdit(id: number, name: string, email: string, website: string, created_at: string, updated_at: string) {
+  startEdit(id: number, name: string, email: string, website: string) {
     this.id = id;
     const dialogRef = this.dialog.open(EditDialogComponent, {
       data: { id: id, name: name, email: email, website: website }

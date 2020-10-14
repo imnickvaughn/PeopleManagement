@@ -1,13 +1,28 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { USERS } from './model/testing/userTest.constant';
+import { UserStore } from './shared/user.store';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
+  let comp: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let store: UserStore
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+      providers: [UserStore]
+    }).compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        comp = fixture.componentInstance;
+        store = TestBed.inject(UserStore);
+        store.users.next(USERS);
+      });
   });
 
   it('should create the app', () => {
@@ -16,16 +31,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'PeopleManagement'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('PeopleManagement');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('PeopleManagement app is running!');
+  it(`should have call 'getUsers()'`, () => {
+    const spyObj = spyOn(store, 'getUsers');
+    comp.getUsers();
+    expect(spyObj).toHaveBeenCalled();
   });
 });

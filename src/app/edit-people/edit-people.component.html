@@ -1,6 +1,12 @@
 
 <div class="container mat-elevation-z8" *ngIf="isToLoad">
-  <mat-table #table [dataSource]="users" matSort class="mat-cell">
+  <div class="form">
+    <mat-form-field floatPlaceholder="never" color="accent">
+      <input matInput [(ngModel)]="searchText" placeholder="Search By Name">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="users | filter : searchText" matSort class="mat-cell">
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
@@ -30,13 +36,21 @@
         <button mat-icon-button color="accent" (click)="startEdit(row.id, row.name, row.email, row.website)">
           <mat-icon aria-label="Edit">edit</mat-icon>
         </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(row.id)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
-  <div class="no-results" [style.display]="users.length == 0 ? '' : 'none'">
+  <div class="no-results" [style.display]="users.length == 0 && (!searchText || searchText.length == 0) ? '' : 'none'">
     No results
+  </div>
+
+  <div class="no-results" [style.display]="((users | filter : searchText).length == 0) && searchText && searchText.length > 0 ? '' : 'none'">
+    No search results
   </div>
 </div>

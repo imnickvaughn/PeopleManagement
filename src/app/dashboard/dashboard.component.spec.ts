@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { USERS } from '../model/testing/userTest.constant';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { UserStore } from '../shared/user.store';
 
 import { DashboardComponent } from './dashboard.component';
@@ -14,7 +15,7 @@ describe('DashboardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [UserStore],
-      declarations: [DashboardComponent]
+      declarations: [DashboardComponent, FilterPipe]
     })
       .compileComponents().then(() => {
         fixture = TestBed.createComponent(DashboardComponent);

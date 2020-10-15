@@ -7,6 +7,7 @@ import { UserStore } from '../shared/user.store';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  searchText: string;
   users: any;
   displayedColumns = ['id', 'name', 'email'];
   constructor(private userStore: UserStore) { }

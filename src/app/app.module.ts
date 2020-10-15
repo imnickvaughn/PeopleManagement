@@ -20,6 +20,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { EditDialogComponent } from './shared/dialogs/edit/edit.dialog.component';
 import { AddDialogComponent } from './shared/dialogs/add/add.dialog.component';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddDialogComponent } from './shared/dialogs/add/add.dialog.component';
     DashboardComponent,
     EditPeopleComponent,
     EditDialogComponent,
-    AddDialogComponent
+    AddDialogComponent,
+    FilterPipe
   ],
   imports: [
     AppRoutingModule,

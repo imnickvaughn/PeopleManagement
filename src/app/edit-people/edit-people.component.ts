@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from '../model/user.model';
 import { AddDialogComponent } from '../shared/dialogs/add/add.dialog.component';
 import { EditDialogComponent } from '../shared/dialogs/edit/edit.dialog.component';
 import { UserStore } from '../shared/user.store';
@@ -13,6 +14,7 @@ export class EditPeopleComponent implements OnInit {
   id: number;
   users: any;
   isToLoad: boolean;
+  searchText: string;
   displayedColumns = ['id', 'name', 'email', 'actions'];
   constructor(private userStore: UserStore, public dialog: MatDialog) { }
 
@@ -49,5 +51,11 @@ export class EditPeopleComponent implements OnInit {
         this.isToLoad = true;
       }, 2);
     });
+  }
+
+
+  deleteItem(id: number) {
+    const usersValue: User[] = this.userStore.users.value;
+    this.userStore.users.next(usersValue.filter(x => x.id !== id));
   }
 }

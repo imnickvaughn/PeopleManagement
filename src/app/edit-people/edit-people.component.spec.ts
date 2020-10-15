@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { USERS } from '../model/testing/userTest.constant';
 import { EditDialogComponent } from '../shared/dialogs/edit/edit.dialog.component';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { SharedModule } from '../shared/shared.module';
 import { UserStore } from '../shared/user.store';
 
@@ -20,7 +21,7 @@ describe('EditPeopleComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, SharedModule],
       providers: [UserStore, MatDialog],
-      declarations: [EditPeopleComponent]
+      declarations: [EditPeopleComponent, FilterPipe]
     })
       .compileComponents().then(() => {
         fixture = TestBed.createComponent(EditPeopleComponent);
@@ -59,5 +60,10 @@ describe('EditPeopleComponent', () => {
     const user = USERS[0];
     component.addNew();
     expect(spyOpenMethodObj).toHaveBeenCalled();
+  });
+
+  it(`should have call 'delete()'`, () => {
+    component.deleteItem(USERS[0].id);
+    expect(store.users.value.length).toBe(0);
   });
 });

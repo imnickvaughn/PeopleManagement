@@ -4,7 +4,7 @@
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
     <div class="form">
       <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >
+        <input matInput #input class="form-control" disabled placeholder="Id" [(ngModel)]="data.id" name="id" required >
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
